@@ -1,0 +1,26 @@
+Prompts Used During Development (via Microsoft Copilot):
+
+1. Write a method to connect to ClickHouse with JWT token authentication.
+2. Implement schema discovery logic for a specific ClickHouse database.
+3. Generate a REST API for exporting data from a ClickHouse table into a Flat File (CSV).
+4. Create a method to parse a Flat File and insert its data into a ClickHouse table.
+5. Develop a frontend HTML file with:
+   - A dropdown for source/target selection.
+   - Input fields for ClickHouse connection parameters.
+   - Column selection controls (checkboxes).
+   - Buttons for actions like "Connect", "Load Columns", "Preview", and "Start Ingestion."
+6. Write the integration logic between the frontend (HTML/JS) and backend APIs using Fetch API.
+7. Document a comprehensive `README.md` for the project, including setup, configuration, and run instructions.
+8. Provide a step-by-step guide for testing the APIs with example datasets.
+9. Guide on how to structure the deliverables for submission (source code, prompts.txt, README, and demo video).
+10. Create test cases for:
+    - ClickHouse to Flat File ingestion.
+    - Flat File to ClickHouse ingestion.
+    - Multi-table JOIN queries.
+    - Connection/authentication failure scenarios.
+11. Generate a sample `index.html` file that includes the UI requirements and interactions for the tool.
+12. Provide error handling strategies for connection/authentication failures and file parsing errors.
+
+---
+
+**Note**: All the above contributions were made using Microsoft Copilot, an AI companion created by Microsoft, for productivity assistance during software development.
