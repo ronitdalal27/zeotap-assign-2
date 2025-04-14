@@ -1,74 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Data Ingestion Tool</title>
-  <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Ingestion Tool</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
 </head>
 <body>
-  <div class="container">
-    <h1>Data Ingestion Tool</h1>
+    <div class="container">
+        <h2>Data Ingestion Tool</h2>
 
-    <!-- Source Selection -->
-    <label for="source">Select Data Source:</label>
-    <select id="source">
-      <option value="clickhouse">ClickHouse</option>
-      <option value="flatfile">Flat File</option>
-    </select>
+        <label for="sourceSelection">Select Data Source:</label>
+        <select id="sourceSelection" onchange="toggleSourceFields()">
+            <option value="">-- Select --</option>
+            <option value="clickhouse">ClickHouse</option>
+            <option value="flatfile">Flat File</option>
+        </select>
 
-    <!-- ClickHouse Connection Inputs -->
-    <div id="clickhouse-config" class="config-section">
-      <h2>ClickHouse Configuration</h2>
-      <label for="host">Host:</label>
-      <input type="text" id="host" placeholder="e.g., localhost">
-      
-      <label for="port">Port:</label>
-      <input type="number" id="port" placeholder="e.g., 9000">
+        <div id="clickhouseFields" style="display:none;">
+            <h3>ClickHouse Connection</h3>
+            <label for="host">Host:</label>
+            <input type="text" id="host" placeholder="Enter ClickHouse Host">
+            <label for="port">Port:</label>
+            <input type="text" id="port" placeholder="Enter ClickHouse Port">
+            <label for="database">Database:</label>
+            <input type="text" id="database" placeholder="Enter Database Name">
+            <label for="username">User:</label>
+            <input type="text" id="username" placeholder="Enter Username">
+            <label for="jwtToken">JWT Token:</label>
+            <input type="text" id="jwtToken" placeholder="Enter JWT Token">
+            <button onclick="fetchTables()">Fetch Tables</button>
+            <div id="tables"></div>
+        </div>
 
-      <label for="database">Database:</label>
-      <input type="text" id="database" placeholder="Database Name">
+        <div id="flatFileFields" style="display:none;">
+            <h3>Flat File Configuration</h3>
+            <label for="filePath">File Path:</label>
+            <input type="text" id="filePath" placeholder="Enter file path">
+            <label for="delimiter">Delimiter:</label>
+            <input type="text" id="delimiter" placeholder="Enter delimiter (e.g., comma)">
+            <button onclick="loadFlatFileColumns()">Load Columns</button>
+        </div>
 
-      <label for="user">User:</label>
-      <input type="text" id="user" placeholder="Username">
+        <div id="columnSelection" style="display:none;">
+            <h3>Select Columns</h3>
+            <div class="columns" id="columns"></div>
+        </div>
 
-      <label for="jwt">JWT Token:</label>
-      <input type="password" id="jwt" placeholder="JWT Token">
+        <div class="buttons">
+            <button onclick="previewData()">Preview Data</button>
+            <button onclick="startIngestion()">Start Ingestion</button>
+        </div>
+
+        <div class="status" id="status"></div>
+        <div class="result" id="result"></div>
     </div>
-
-    <!-- Flat File Configuration -->
-    <div id="flatfile-config" class="config-section" style="display: none;">
-      <h2>Flat File Configuration</h2>
-      <label for="filename">File Name:</label>
-      <input type="text" id="filename" placeholder="e.g., data.csv">
-
-      <label for="delimiter">Delimiter:</label>
-      <input type="text" id="delimiter" placeholder="e.g., , or ;">
-    </div>
-
-    <!-- Schema and Column Selection -->
-    <div>
-      <button id="fetch-schema">Fetch Schema</button>
-    </div>
-    <div id="columns-section" style="display: none;">
-      <h2>Select Columns</h2>
-      <div id="columns-list">
-        <!-- Dynamically loaded checkboxes for column selection -->
-      </div>
-    </div>
-
-    <!-- Action Buttons -->
-    <div>
-      <button id="start-ingestion">Start Ingestion</button>
-    </div>
-
-    <!-- Status and Results -->
-    <div id="status-area">
-      <h3>Status:</h3>
-      <p id="status">Idle</p>
-    </div>
-  </div>
-
-  <script src="app.js"></script> <!-- Link to external JS -->
 </body>
 </html>
